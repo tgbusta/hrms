@@ -1,45 +1,43 @@
 package javareactcamp.humanResourceManagementSystem.entities.concretes;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import java.util.Date;
+
+import javax.persistence.*;
 
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @Entity
 @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")
-@Table(name="employers")
+@Table(name="candidates")
 
-public class Employer extends User{
+public class Candidate extends User {
 
-	@Column(name="company_name", nullable=false)
-	private String companyName;
+	@Column(name="first_name", nullable=false)
+	private String firstName;
 	
-	@Column(name="web_address", nullable=false)
-	private String webAddress;
+	@Column(name="last_name", nullable=false)
+	private String lastName;
 	
-	@Column(name="phone_number",nullable = false)
-	private String phoneNumber;
+	@Column(name="identity_number",nullable = false, unique = true)
+	private long identityNumber;
+	
+	@Column(name="birth_year", nullable=false)
+	private Date birthYear;
 	
 	@Column(name = "email", nullable = false)
 	public String email;
 	
 	@Column(name = "password", nullable = false)
 	public String password;
-		
+	
 	@Column (name="is_active" , nullable=false)
 	private boolean isActive=false;
 	
 	@Transient
 	private String rePassword;
-	
 }

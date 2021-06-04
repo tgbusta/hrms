@@ -18,8 +18,10 @@ public abstract class User{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	public int id;
+	
 	@Column(name = "email", nullable = false)
 	public String email;
+	
 	@Column(name = "password", nullable = false)
 	public String password;
 
