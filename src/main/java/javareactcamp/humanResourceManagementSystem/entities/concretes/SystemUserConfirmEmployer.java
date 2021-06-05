@@ -7,24 +7,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
+import javareactcamp.humanResourceManagementSystem.entities.abstracts.SystemUserConfirm;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-
 @Data
 @EqualsAndHashCode(callSuper=false)
-@AllArgsConstructor
 @Entity
-@Table(name="job_titles")
-public class JobTitle {
-	
+@Table(name = "system_user_confirm_employers")
+public class SystemUserConfirmEmployer extends SystemUserConfirm {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id" , nullable=false)
-	private int id;
-	
-	@Column(name="title" , nullable=false)
-	private String title;
+	@Column(name = "id", nullable = false)
+	public int id;
 
+	@Column(name = "employer_id", nullable = false)
+	public int employerId;
+	
 }

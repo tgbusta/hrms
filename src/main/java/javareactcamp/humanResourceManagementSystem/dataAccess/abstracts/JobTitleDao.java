@@ -1,9 +1,11 @@
 package javareactcamp.humanResourceManagementSystem.dataAccess.abstracts;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import javareactcamp.humanResourceManagementSystem.entities.concretes.JobTitle;
 
+@Repository
 public interface JobTitleDao extends JpaRepository<JobTitle, Integer>{
-
+	boolean existsJobTitleByTitle(String jobTitle);
 }

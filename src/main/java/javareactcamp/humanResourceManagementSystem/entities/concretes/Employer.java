@@ -2,6 +2,8 @@ package javareactcamp.humanResourceManagementSystem.entities.concretes;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -18,6 +20,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")
 @Table(name="employers")
+@Inheritance(strategy = InheritanceType.JOINED)
 
 public class Employer extends User{
 

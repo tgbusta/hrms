@@ -39,64 +39,18 @@ public class CandidateManager implements CandidateService {
         this.sendEmailService = sendEmailService;
     }
 
-    @Override
-    public DataResult<List<Candidate>> getAll() {
-        return new SuccessDataResult<List<Candidate>>(this.candidateDao.findAll());
-    }
+	@Override
+	public Result register(Candidate candidate, String passwordConfirm) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    @Override
-    public Result register(Candidate candidate, String passwordConfirm) {
+	@Override
+	public DataResult<List<Candidate>> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-        var result = CandidateValidator.validatorForCandidate(candidate);
-
-        if(!result.isSuccess())
-        {
-            return result;
-        }
-
-        if(!this.emailCheckService.emailCheck(candidate.getEmail()))
-        {
-            return new ErrorResult("E-Mail geçersiz. Lütfen geçerli bir mail adresi giriniz.");
-        }
-
-        if(!this.checkMernisService.checkIfRealPerson(candidate)){
-            return new ErrorResult("Kimlik Bilgisi Doğrulanamadı. Kayıt Başarısız...");
-        }
-
-        if(!isEmailUsed(candidate.getEmail())){
-            return new ErrorResult("E-Mail sistemde mevcut. Kayıt Başarısız...");
-        }
-
-        if(!isIdentityNumberUsed(candidate.getIdentityNumber())){
-            return new ErrorResult("Kimlik Numarası sistemde mevcut. Kayıt Başarısız...");
-        }
-
-        if(!Objects.equals(candidate.getPassword(),passwordConfirm)){
-        return new ErrorResult("Şİfre eşleşmedi. Kayıt Başarısız...");
-        }
-
-    String genarator = Genarator.generateString();
-    String mailBodyMessage = String.format("Kayıt işleminin tamamlanabilmesi için gerekli kod : %s " ,genarator);
-
-    this.candidateDao.save(candidate);
-    this.sendEmailService.sendSimpleMessage(candidate.getEmail(),"Kayıt Onaylama Hk.", mailBodyMessage);
-        return new SuccessResult("<<< Kayıt Başarılı. Kullanıcıya mail gönderildi. >>>");
-}
-
-    public boolean isEmailUsed(String email){
-        List<Candidate> emailList = this.candidateDao.findAllByEmail(email);
-        if(emailList.size()>0){
-            return false;
-        }
-        return true;
-    }
-
-    public boolean isIdentityNumberUsed(String identityNumber){
-        Candidate result = this.candidateDao.findByIdentityNumber(identityNumber);
-        if(result!=null){
-            return  false;
-        }
-        return true;
-    }
+   
 
 }

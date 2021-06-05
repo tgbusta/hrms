@@ -14,6 +14,7 @@ import lombok.*;
 @Entity
 @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")
 @Table(name="candidates")
+@Inheritance(strategy = InheritanceType.JOINED)
 
 public class Candidate extends User {
 
